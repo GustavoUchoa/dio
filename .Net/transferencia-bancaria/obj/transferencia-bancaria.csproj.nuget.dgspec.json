@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\transferencia-bancaria\\transferencia-bancaria.csproj": {}
+    "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\.net\\transferencia-bancaria\\transferencia-bancaria.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\transferencia-bancaria\\transferencia-bancaria.csproj": {
+    "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\.net\\transferencia-bancaria\\transferencia-bancaria.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\transferencia-bancaria\\transferencia-bancaria.csproj",
+        "projectUniqueName": "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\.net\\transferencia-bancaria\\transferencia-bancaria.csproj",
         "projectName": "transferencia-bancaria",
-        "projectPath": "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\transferencia-bancaria\\transferencia-bancaria.csproj",
+        "projectPath": "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\.net\\transferencia-bancaria\\transferencia-bancaria.csproj",
         "packagesPath": "C:\\Users\\gusta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\transferencia-bancaria\\obj\\",
+        "outputPath": "C:\\Users\\gusta\\OneDrive\\Documentos\\GitHub\\dio\\.net\\transferencia-bancaria\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

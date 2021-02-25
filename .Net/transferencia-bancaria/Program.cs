@@ -1,4 +1,5 @@
 ﻿using System;
+using transferencia_bancaria.Models;
 
 namespace transferencia_bancaria
 {
@@ -6,7 +7,9 @@ namespace transferencia_bancaria
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Conta conta1 = new Conta();        
+
+            Console.WriteLine(conta1.ToString());
         }
     }
 }
