@@ -1,5 +1,6 @@
 ﻿using System;
 using transferencia_bancaria.Models;
+using transferencia_bancaria.Enum;
 
 namespace transferencia_bancaria
 {
@@ -7,9 +8,8 @@ namespace transferencia_bancaria
     {
         static void Main(string[] args)
         {
-            Conta conta1 = new Conta();        
-
-            Console.WriteLine(conta1.ToString());
+            Conta conta = new Conta(TipoConta.PessoaFisica, "Gustavo", 1000, 100);
+            Console.WriteLine(conta.ToString());
         }
     }
 }

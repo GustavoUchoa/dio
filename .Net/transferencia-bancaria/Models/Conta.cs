@@ -75,7 +75,14 @@ namespace transferencia_bancaria.Models
 
         public override string ToString()
         {
-            return base.ToString();
+            string retorno = string.Empty;
+
+            retorno += $"TipoConta: { this.TipoConta } | "; 
+            retorno += $"Nome: { this.Nome } | "; 
+            retorno += $"Saldo: { this.Saldo } | "; 
+            retorno += $"Crédito: { this.Credito } | "; 
+
+            return retorno;
         }        
     }
 }
