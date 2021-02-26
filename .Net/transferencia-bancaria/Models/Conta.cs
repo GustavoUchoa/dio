@@ -26,7 +26,7 @@ namespace transferencia_bancaria.Models
             this.Credito = credito;
         }
 
-        public void Criar(TipoConta tipoConta, string nome, double saldo, double credito)
+        public void Adicionar(TipoConta tipoConta, string nome, double saldo, double credito)
         {
             this.TipoConta = tipoConta;
             this.Nome = nome;
