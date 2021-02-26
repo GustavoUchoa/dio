@@ -44,7 +44,7 @@ namespace transferencia_bancaria.Views
                         ListarContas();
                         break;
                     case "2":
-                        OpcaoInserir();
+                        InserirConta();
                         break;
                     
                     default:
@@ -67,6 +67,7 @@ namespace transferencia_bancaria.Views
                 {
                     Console.WriteLine($"> { conta.ToString() }");
                 }
+                
                 Console.ReadKey();
             }
             else
@@ -76,24 +77,66 @@ namespace transferencia_bancaria.Views
             }
         }
 
-        private static void OpcaoInserir()
+        private static void InserirConta()
         {
             Console.WriteLine("- Nova Conta");
 
-            Console.Write("Escolha: 1- Conta Física |  2- Conta Jurídica: ");
-            // TODO:validar entrada de dados
-            int entradaTipoConta = int.Parse(Console.ReadLine());
+            #region TipoConta
+
+            bool TipoContaValido = false;
+            int entradaTipoConta;
+            do
+            {
+                Console.Write("Escolha: 1- Conta Física |  2- Conta Jurídica: ");
+                TipoContaValido = Int32.TryParse(Console.ReadLine(), out entradaTipoConta);
+
+                if (!TipoContaValido)
+                    Console.WriteLine("Entrada de dados inválida! *insira um inteiro");
+                else
+                {
+                    if (entradaTipoConta != 1 && entradaTipoConta != 2)
+                        TipoContaValido = false;
+                }
+            } while (!TipoContaValido);
+            
+            #endregion
+
+            #region Nome
 
             Console.Write("Digite seu nome: ");
             string entradaNome = Console.ReadLine();
 
-            Console.Write("Digite seu saldo: ");
-            // TODO:validar entrada de dados
-            double entradaSaldo = double.Parse(Console.ReadLine());
+            #endregion
 
-            Console.Write("Digite seu crédito: ");
-            // TODO:validar entrada de dados
-            double entradaCredito = double.Parse(Console.ReadLine());
+            #region Saldo
+
+            bool saldoValido = false;
+            double entradaSaldo;
+            do
+            {
+                Console.Write("Digite seu saldo: ");
+                saldoValido = double.TryParse(Console.ReadLine(), out entradaSaldo);
+
+                if (!saldoValido)
+                    Console.WriteLine("Entrada de dados inválida! *insira um double");
+            } while (!saldoValido);
+            
+            #endregion
+
+            #region Crédito
+
+            bool creditoValido = false;
+            double entradaCredito;
+            do
+            {
+                Console.Write("Digite seu crédito: ");
+                creditoValido = double.TryParse(Console.ReadLine(), out entradaCredito);
+
+                if (!creditoValido)
+                    Console.WriteLine("Entrada de dados inválida! *insira um double");
+            } while (!creditoValido);
+            
+            #endregion
 
             ContaController contaController = new ContaController();
             var conta = contaController.Adicionar((TipoConta)entradaTipoConta, entradaNome, entradaSaldo, entradaCredito);
