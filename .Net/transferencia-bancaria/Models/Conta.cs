@@ -3,19 +3,19 @@ using transferencia_bancaria.Enum;
 
 namespace transferencia_bancaria.Models
 {
-    public class Conta
-    {        
+    public abstract class Conta
+    {
         public TipoConta TipoConta { get; set; }
 
-        public string Nome { get; set; }        
-        
+        public string Nome { get; set; }
+
         public double Saldo { get; set; }
-        
+
         public double Credito { get; set; }
 
         public Conta()
         {
-            
+
         }
 
         public Conta(TipoConta tipoConta, string nome, double saldo, double credito)
@@ -26,12 +26,9 @@ namespace transferencia_bancaria.Models
             this.Credito = credito;
         }
 
-        public void Adicionar(TipoConta tipoConta, string nome, double saldo, double credito)
+        public virtual void Adicionar(int tipoConta, string nome, double saldo, double credito)
         {
-            this.TipoConta = tipoConta;
-            this.Nome = nome;
-            this.Saldo = saldo;
-            this.Credito = credito;
+
         }
 
         public bool Sacar(Conta conta, double valorSaque)
@@ -45,42 +42,41 @@ namespace transferencia_bancaria.Models
                 return false;
         }
 
-        public void Depositar(double valorDeposito)
+        public Conta Depositar(Conta conta, double valorDeposito)
         {
-            this.Saldo += valorDeposito;
-            Console.WriteLine($"Saldo atual da conta de { this.Nome } é { this.Saldo }");
+            conta.Saldo += valorDeposito;
+            return conta;
         }
 
-        public void Transferir(Conta contaOrigem, double valorTransferencia, Conta contaDestino)
+        public bool Transferir(double valorTransferencia, Conta contaDestino)
         {
-            if (SaldoSuficiente(contaOrigem, valorTransferencia))
+            if (Sacar(this, valorTransferencia))
             {
-                contaDestino.Depositar(valorTransferencia);
-                Console.WriteLine($"Transferido { valorTransferencia } da conta { contaOrigem.Nome } para { contaDestino.Nome }");
+                Depositar(contaDestino, valorTransferencia);
+                return true;
             }
             else
-                Console.WriteLine("Saldo insuficiente!");
+                return false;
         }
 
         private bool SaldoSuficiente(Conta conta, double valorSaque)
         {
-            if (conta.Saldo - valorSaque < (conta.Credito *-1))
+            if (conta.Saldo - valorSaque < (conta.Credito * -1))
                 return false;
             else
                 return true;
         }
-        
-        
+
         public override string ToString()
         {
             string retorno = string.Empty;
 
-            retorno += $"TipoConta: { this.TipoConta } | "; 
-            retorno += $"Nome: { this.Nome } | "; 
-            retorno += $"Saldo: { this.Saldo } | "; 
-            retorno += $"Crédito: { this.Credito } | "; 
+            retorno += $"TipoConta: { this.TipoConta } | ";
+            retorno += $"Nome: { this.Nome } | ";
+            retorno += $"Saldo: { this.Saldo } | ";
+            retorno += $"Crédito: { this.Credito } | ";
 
             return retorno;
-        }        
+        }
     }
 }

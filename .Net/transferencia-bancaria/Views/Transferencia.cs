@@ -5,7 +5,7 @@ using transferencia_bancaria.Controllers;
 namespace transferencia_bancaria.Views
 {
     public static class Transferencia
-    {      
+    {
         public static void Iniciar()
         {
             Console.WriteLine();
@@ -15,7 +15,7 @@ namespace transferencia_bancaria.Views
             Console.WriteLine("=============================");
 
             Console.WriteLine("[1] Listar contas");
-            Console.WriteLine("[2] Nova conta");            
+            Console.WriteLine("[2] Nova conta");
             Console.WriteLine("[3] Sacar");
             Console.WriteLine("[4] Depositar");
             Console.WriteLine("[5] Transferir");
@@ -47,7 +47,7 @@ namespace transferencia_bancaria.Views
                         ListarContas();
                         break;
                     case "2":
-                        NovaConta();
+                        Adicionar();
                         break;
                     case "3":
                         Sacar();
@@ -57,7 +57,7 @@ namespace transferencia_bancaria.Views
                         break;
                     case "5":
                         Transferir();
-                        break;                    
+                        break;
                     case "C":
                         Console.Clear();
                         break;
@@ -70,13 +70,13 @@ namespace transferencia_bancaria.Views
             }
 
             Console.WriteLine("Obrigado por utilizar nossos serviços.");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         private static void ListarContas()
         {
             Console.WriteLine("- Listar Contas");
-            
+
             ContaController contaController = new ContaController();
             var contas = contaController.Listar();
 
@@ -95,21 +95,21 @@ namespace transferencia_bancaria.Views
             Console.ReadKey();
         }
 
-        private static void NovaConta()        
+        private static void Adicionar()
         {
             Console.WriteLine("- Nova Conta");
 
-            int entradaTipoConta = validarEntradaInt();
+            TipoConta entradaTipoConta = (TipoConta)validarEntradaTipoConta();
+            int entradaCpfOuCnpj = entradaTipoConta.Equals(TipoConta.PessoaFisica) ? validarEntradaInt("cpf") : validarEntradaInt("cnpj");
 
             Console.Write("Digite seu nome: ");
             string entradaNome = Console.ReadLine();
 
             double entradaSaldo = validarEntradaDouble("saldo");
-
-            double entradaCredito = validarEntradaDouble("credito");
+            double entradaCredito = validarEntradaDouble("crédito");
 
             ContaController contaController = new ContaController();
-            var conta = contaController.Adicionar((TipoConta)entradaTipoConta, entradaNome, entradaSaldo, entradaCredito);
+            var conta = contaController.Adicionar(entradaTipoConta, entradaCpfOuCnpj, entradaNome, entradaSaldo, entradaCredito);
 
             Console.WriteLine($"> Conta criada: { conta.ToString() }");
             Console.ReadKey();
@@ -117,12 +117,12 @@ namespace transferencia_bancaria.Views
 
         private static void Sacar()
         {
-            Console.WriteLine("- Sacar");            
-            
-            int indiceConta = validarEntradaNumeroConta();            
-            double entradaSaque = validarEntradaDouble("sacar");
+            Console.WriteLine("- Sacar");
 
-            ContaController contaController = new ContaController();            
+            int indiceConta = validarEntradaNumeroConta(string.Empty);
+            double entradaSaque = validarEntradaDouble("saque");
+
+            ContaController contaController = new ContaController();
             var conta = contaController.Sacar(indiceConta, entradaSaque);
 
             if (conta != null)
@@ -136,21 +136,56 @@ namespace transferencia_bancaria.Views
         private static void Depositar()
         {
             Console.WriteLine("- Depositar");
+
+            int indiceConta = validarEntradaNumeroConta(string.Empty);
+            double entradaDeposito = validarEntradaDouble("depósito");
+
+            ContaController contaController = new ContaController();
+            var conta = contaController.Depositar(indiceConta, entradaDeposito);
+
+            if (conta != null)
+                Console.WriteLine($"Saldo atual da conta de { conta.Nome } é { conta.Saldo }");
+            else
+                Console.WriteLine("Saldo insuficiente!");
+
+            Console.ReadKey();
         }
-        
+
         private static void Transferir()
         {
             Console.WriteLine("- Transferência");
+
+            int indiceContaOrigem = validarEntradaNumeroConta("origem");
+            double entradaTransferir = validarEntradaDouble("transferência");
+            int indiceContaDestino = validarEntradaNumeroConta("destino");
+
+            ContaController contaController = new ContaController();
+            var contaOrigem = contaController.Transferir(indiceContaOrigem, entradaTransferir, indiceContaDestino);
+
+            if (contaOrigem != null)
+            {
+                Console.WriteLine($"Transferência realizada com sucesso!");
+                Console.WriteLine($"Saldo atual da conta de { contaOrigem.Nome } é { contaOrigem.Saldo }");
+            }
+            else
+                Console.WriteLine("Saldo insuficiente!");
+
+            Console.ReadKey();
         }
-    
+
+        #region Métodos auxiliares
         private static double validarEntradaDouble(string dado)
         {
             bool valido = false;
             double saida;
             do
             {
-                Console.Write($"Digite seu { dado }: ");
-                valido = double.TryParse(Console.ReadLine(), out saida);
+                Console.Write($"Digite o valor [{ dado }]: ");
+                string entrada = Console.ReadLine().ToUpper();
+                if (entrada.Equals("X"))
+                    Iniciar();
+
+                valido = double.TryParse(entrada, out saida);
 
                 if (!valido)
                     Console.WriteLine("Entrada de dados inválida!");
@@ -158,20 +193,44 @@ namespace transferencia_bancaria.Views
 
             return saida;
         }
-    
-        private static int validarEntradaInt()
+
+        private static int validarEntradaInt(string dado)
         {
             bool valido = false;
             int saida;
             do
-            {          
-                Console.Write("Escolha: 1- Conta Física |  2- Conta Jurídica: ");      
-                valido = Int32.TryParse(Console.ReadLine(), out saida);
+            {
+                Console.Write($"Digite seu { dado }: ");
+                string entrada = Console.ReadLine().ToUpper();
+                if (entrada.Equals("X"))
+                    Iniciar();
+
+                valido = int.TryParse(entrada, out saida);
+
+                if (!valido)
+                    Console.WriteLine("Entrada de dados inválida!");
+            } while (!valido);
+
+            return saida;
+        }
+
+        private static int validarEntradaTipoConta()
+        {
+            bool valido = false;
+            int saida;
+            do
+            {
+                Console.Write("Escolha: 1- Conta Física |  2- Conta Jurídica: ");
+                string entrada = Console.ReadLine().ToUpper();
+                if (entrada.Equals("X"))
+                    Iniciar();
+
+                valido = Int32.TryParse(entrada, out saida);
 
                 if (!valido)
                     Console.WriteLine("Entrada de dados inválida! *insira um inteiro");
                 else if (saida != 1 && saida != 2)
-                {                    
+                {
                     valido = false;
                     Console.WriteLine("Entrada de dados inválida!");
                 }
@@ -180,22 +239,30 @@ namespace transferencia_bancaria.Views
             return saida;
         }
 
-        private static int validarEntradaNumeroConta()
+        private static int validarEntradaNumeroConta(string conta)
         {
             bool valido = false;
             int saida;
-            
+
             ContaController contaController = new ContaController();
             var contas = contaController.Listar();
             do
-            {     
-                Console.Write("Digite o número da conta: ");
-                valido = Int32.TryParse(Console.ReadLine(), out saida);
+            {
+                if (string.IsNullOrEmpty(conta))
+                    Console.Write($"Digite o número da conta: ");
+                else
+                    Console.Write($"Digite o número da conta { conta }: ");
+
+                string entrada = Console.ReadLine().ToUpper();
+                if (entrada.Equals("X"))
+                    Iniciar();
+
+                valido = Int32.TryParse(entrada, out saida);
 
                 if (!valido)
                     Console.WriteLine("Entrada de dados inválida! *insira um inteiro");
-                else if (saida > contas.Count -1)
-                {                    
+                else if (saida > contas.Count - 1)
+                {
                     valido = false;
                     Console.WriteLine("Conta inexistente!");
                 }
@@ -203,5 +270,6 @@ namespace transferencia_bancaria.Views
 
             return saida;
         }
+        #endregion
     }
 }
