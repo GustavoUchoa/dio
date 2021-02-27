@@ -4,16 +4,9 @@ using transferencia_bancaria.Controllers;
 
 namespace transferencia_bancaria.Views
 {
-    public class Transferencia
-    {
-        string opcaoUsuario;
-
-        public Transferencia()
-        {
-
-        }        
-
-        public void Menu()
+    public static class Transferencia
+    {      
+        public static void Iniciar()
         {
             Console.WriteLine();
             Console.WriteLine("=============================");
@@ -30,7 +23,7 @@ namespace transferencia_bancaria.Views
             Console.WriteLine("[X] Sair");
 
             Console.Write("> Opção: ");
-            opcaoUsuario = Console.ReadLine().ToUpper();
+            string opcaoUsuario = Console.ReadLine().ToUpper();
             Console.WriteLine();
 
             if (opcaoUsuario != "1" && opcaoUsuario != "2" && opcaoUsuario != "3" &&
@@ -38,11 +31,13 @@ namespace transferencia_bancaria.Views
             {
                 Console.WriteLine("Entrada de dados invalida!");
                 Console.ReadKey();
-                Menu();
+                Iniciar();
             }
+
+            ExecutarOpcao(opcaoUsuario);
         }
 
-        public void ExecutarOpcao()
+        public static void ExecutarOpcao(string opcaoUsuario)
         {
             while (!opcaoUsuario.Equals("X"))
             {
@@ -71,7 +66,7 @@ namespace transferencia_bancaria.Views
                         throw new ArgumentOutOfRangeException();
                 }
 
-                Menu();
+                Iniciar();
             }
 
             Console.WriteLine("Obrigado por utilizar nossos serviços.");

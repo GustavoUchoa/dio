@@ -6,10 +6,7 @@ namespace transferencia_bancaria
     {
         static void Main(string[] args)
         {
-            Transferencia transferencia = new Transferencia();
-            
-            transferencia.Menu();
-            transferencia.ExecutarOpcao();
+            Transferencia.Iniciar();
         }        
     }
 }
