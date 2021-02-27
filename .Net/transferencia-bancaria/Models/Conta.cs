@@ -34,12 +34,15 @@ namespace transferencia_bancaria.Models
             this.Credito = credito;
         }
 
-        public void Sacar(Conta conta, double valorSaque)
+        public bool Sacar(Conta conta, double valorSaque)
         {
             if (SaldoSuficiente(conta, valorSaque))
-                Console.WriteLine($"Saldo atual da conta de { this.Nome } é { this.Saldo }");
+            {
+                this.Saldo -= valorSaque;
+                return true;
+            }
             else
-                Console.WriteLine("Saldo insuficiente!");
+                return false;
         }
 
         public void Depositar(double valorDeposito)
@@ -66,7 +69,8 @@ namespace transferencia_bancaria.Models
             else
                 return true;
         }
-
+        
+        
         public override string ToString()
         {
             string retorno = string.Empty;
