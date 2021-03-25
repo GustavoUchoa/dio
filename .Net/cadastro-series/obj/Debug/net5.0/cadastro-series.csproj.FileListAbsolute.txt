@@ -1,0 +1,16 @@
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\cadastro-series.exe
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\cadastro-series.deps.json
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\cadastro-series.runtimeconfig.json
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\cadastro-series.runtimeconfig.dev.json
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\cadastro-series.dll
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\ref\cadastro-series.dll
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\bin\Debug\net5.0\cadastro-series.pdb
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.csprojAssemblyReference.cache
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.AssemblyInfoInputs.cache
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.AssemblyInfo.cs
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.csproj.CoreCompileInputs.cache
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.dll
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\ref\cadastro-series.dll
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.pdb
+C:\Users\gusta\OneDrive\Documentos\GitHub\dio\.Net\cadastro-series\obj\Debug\net5.0\cadastro-series.genruntimeconfig.cache
